@@ -32,6 +32,23 @@ const deployAndDestoryContract = async (_salt: string, arg: string, factory: Fac
   console.log('');
 };
 
+const sendManyTx = async (count: number) => {
+  console.log(`feeding ${count} txs ... cur block: ${await ethers.provider.getBlockNumber()}`);
+  const [deployer, user] = await ethers.getSigners();
+
+  for (let i = 0; i < count; i++) {
+    const tx = await deployer.sendTransaction({
+      to: user.address,
+      value: 0,
+    });
+
+    await tx.wait();
+  }
+
+  console.log(`finished! cur block: ${await ethers.provider.getBlockNumber()}`);
+
+};
+
 async function main() {
   const Factory = await ethers.getContractFactory('Factory');
 
@@ -43,6 +60,8 @@ async function main() {
   for (const _salt of ['s1','s2']) {
     for (const arg of ['d1', 'd2']) {
       await deployAndDestoryContract(_salt, arg, factory);
+
+      await sendManyTx(100);   // 10 new blocks
 
       console.log('=============================== SECOND RUN ===============================');
       await deployAndDestoryContract(_salt, arg, factory);
