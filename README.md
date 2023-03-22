@@ -1,11 +1,13 @@
-# Sample Hardhat Project
-- prepare
+# Create2 Example
+## prepare
 ```
 yarn
 yarn build
 ```
 
-- run script on hardhat network (ok)
+## run script on hardhat network (ok)
+it works fine, and create2 should be able to create same contract on the same address after the previous contract was destroyed.
+
 ```
 yarn deploy
 
@@ -149,7 +151,9 @@ actual:  {
 ---------------------------------------------------------------------------
 ```
 
-- run script on mandala network (error)
+## run script on mandala network (error)
+after destroying previous contract, create2 failed to create contract on the same address.
+
 ```
 yarn deploy --network mandala
 
