@@ -151,7 +151,7 @@ actual:  {
 ---------------------------------------------------------------------------
 ```
 
-## run script on mandala network (error)
+## run script on local mandala network (error)
 after destroying previous contract, create2 failed to create contract on the same address.
 
 ```
